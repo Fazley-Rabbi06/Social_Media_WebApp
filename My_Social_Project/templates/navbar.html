@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+     <script src="https://kit.fontawesome.com/df419aee0b.js" crossorigin="anonymous"></script>
+     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">     
+
+    <title>{% block title_block %} Social {% endblock %}</title>
+    {% block css_block %} {% endblock %}
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-light navbar-light"> 
+    <ul class="navbar-nav">
+        <li class="navbar-item active">
+            <a class="nav-link" href="{% url 'app_posts:home' %}">Home</a>
+        </li>
+        &nbsp;&nbsp;&nbsp;
+        <form class="form-inline" method="GET">
+            <input type="text" class="form-control mr-sm-2" name="search" placeholder="Search">
+            <button class="btn btn-sm btn-success" type="submit">Search</button>
+        </form>
+        &nbsp;&nbsp;&nbsp;
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'app_login:logout' %}">Logout</a>
+        </li>
+        &nbsp;
+        {% if user.user_profile.profile_pic %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'app_login:profile' %}"><img src="/posts/media/{{ user.user_profile.profile_pic }}" alt="Profile" class="rounded-circle"width="40px"height="40px"></a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'app_login:profile' %}"><img src="/posts/media/profile_pics/default.png" alt="Profile" class="rounded-circle"width="40px"height="40px"></a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+    <div class="container" style="padding-top: 20px;">
+        {% block body_block %}
+
+        {% endblock %}
+    </div>
+   
+</body>
+</html>
